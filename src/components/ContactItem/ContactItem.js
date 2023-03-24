@@ -1,48 +1,37 @@
-import { useSelector } from 'react-redux';
-import { ThreeCircles } from 'react-loader-spinner';
+import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { deleteContact } from 'redux/operations';
+import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
 
-import {
-  selectFiltredContacts,
-  selectIsLoading,
-  selectError,
-} from 'redux/selectors';
+import { Button } from './ContactItem.styled';
 
-import { ContactItem } from 'components/ContactItem/ContactItem';
-import { Snack } from 'components/Snack/Snack';
-import { Item, List, SpinnerBox } from './ContactList.styled';
+export function ContactItem({ id, name, number }) {
+  const dispatch = useDispatch();
 
-export function ContactList() {
-  const isLoading = useSelector(selectIsLoading);
-  const error = useSelector(selectError);
-  const filtredContacts = useSelector(selectFiltredContacts);
+  const onDeleteContact = () => {
+    dispatch(deleteContact(id));
+  };
 
   return (
     <>
-      {isLoading && !error && (
-        <SpinnerBox>
-          <ThreeCircles
-            height="100"
-            width="100"
-            color="#f8a035"
-            wrapperStyle={{}}
-            wrapperClass=""
-            visible={true}
-            ariaLabel="three-circles-rotating"
-          />
-        </SpinnerBox>
-      )}
-      {error && <p>{error}</p>}
-      {filtredContacts.length > 0 && !error ? (
-        <List>
-          {filtredContacts.map(({ id, name, number }) => (
-            <Item key={id}>
-              <ContactItem id={id} name={name} number={number} />
-            </Item>
-          ))}
-        </List>
-      ) : (
-        !isLoading && <Snack type="error" text="Not found any contact :(" />
-      )}
+      <p>{name}</p>
+      <p>{number}</p>
+
+      <Button
+        size="small"
+        variant="contained"
+        type="button"
+        onClick={onDeleteContact}
+        startIcon={<DeleteForeverRoundedIcon />}
+      >
+        Delete
+      </Button>
     </>
   );
 }
+
+ContactItem.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
+};
