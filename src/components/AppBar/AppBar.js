@@ -6,7 +6,6 @@ import authSelectors from 'redux/auth/authSelectors';
 import Navigation from 'components/Navigation/Navigation';
 import UserMenu from 'components/UserMenu/UserMenu';
 import AuthNav from 'components/AuthNav/AuthNav';
-// import Footer from 'components/Footer/Footer';
 
 import { Toolbar, Container, CircularProgress, Box } from '@mui/material';
 import { AppBarStyled } from 'utils/Header';
