@@ -1,0 +1,14 @@
+.inputLog {
+    margin-bottom: 10px;
+}
+
+.boxs {
+    margin-top: 40px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 200px;
+    padding: 50px 50px;
+    box-shadow: 10px 5px 5px 5px #293f58;
+    text-align: center;
+
+}
