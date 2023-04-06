@@ -1,6 +1,6 @@
 import style from './register.module.css'
 import { useDispatch } from 'react-redux';
-import { signup } from 'redux/auth/authOperation';
+import { signup } from "redux/auth/authOperations" ;
 import { useState } from 'react';
 import { selectIsLogin } from 'redux/auth/authSelector';
 import { Navigate } from 'react-router-dom';
