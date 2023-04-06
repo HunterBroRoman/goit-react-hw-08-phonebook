@@ -1,48 +1,46 @@
-import { useSelector } from 'react-redux';
-import { ThreeCircles } from 'react-loader-spinner';
+import style from 'components/Filter/filter.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { setFilter } from 'redux/filter/filter-slice';
+import { deleteContact } from 'redux/operation/operation';
+import { selectFilterdContacts } from 'redux/selectors';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Notify } from 'notiflix';
 
-import {
-  selectFiltredContacts,
-  selectIsLoading,
-  selectError,
-} from 'redux/selectors';
+export default function ContactList() {
+    // const { isLoading } = useSelector(selectContacts);
+    const dispatch = useDispatch();
+    const contacts = useSelector(selectFilterdContacts);
+    // const { isLoading } = useSelector(selectContacts);
 
-import { ContactItem } from 'components/ContactItem/ContactItem';
-import { Snack } from 'components/Snack/Snack';
-import { Item, List, SpinnerBox } from './ContactList.styled';
+    const removeContact = id => {
+        const action = deleteContact(id);
+        dispatch(action);
+        if (contacts.length === 1) {
+            dispatch(setFilter(''));
 
-export function ContactList() {
-  const isLoading = useSelector(selectIsLoading);
-  const error = useSelector(selectError);
-  const filtredContacts = useSelector(selectFiltredContacts);
+            Notify.warning('No more contacts matching the filter.');
+        }
+    };
 
-  return (
-    <>
-      {isLoading && !error && (
-        <SpinnerBox>
-          <ThreeCircles
-            height="100"
-            width="100"
-            color="#f8a035"
-            wrapperStyle={{}}
-            wrapperClass=""
-            visible={true}
-            ariaLabel="three-circles-rotating"
-          />
-        </SpinnerBox>
-      )}
-      {error && <p>{error}</p>}
-      {filtredContacts.length > 0 && !error ? (
-        <List>
-          {filtredContacts.map(({ id, name, number }) => (
-            <Item key={id}>
-              <ContactItem id={id} name={name} number={number} />
-            </Item>
-          ))}
-        </List>
-      ) : (
-        !isLoading && <Snack type="error" text="Not found any contact :(" />
-      )}
-    </>
-  );
+    const elem = contacts.map(({ name, number, id }) => {
+        return (
+            <li key={id}>
+                {' '}
+                {name} , {number}
+                <DeleteIcon
+                    className={style.icon}
+                    color="error"
+                    size="small"
+                    fontSize="inherit"
+                    onClick={() => removeContact(id)}
+                />
+            </li>
+        );
+    });
+    return (
+        <div className={style.box}>
+            <h3>Contacts</h3>
+            <ol>{elem}</ol>
+        </div>
+    );
 }
