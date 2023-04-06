@@ -2,7 +2,7 @@ import UserRoutes from "./UseRoustes";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { SelectIsLoadingUserStatus } from "redux/auth/authSelector";
-import { current } from "redux/auth/authOperation";
+import { current } from "redux/auth/authOperations";
 function App() {
 
   const dispatch = useDispatch();

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "redux/auth/authSelector";
-import { logOut } from "redux/auth/authOperation";
+import { logOut } from "redux/auth/authOperations";
 import style from './navContacts/nav.module.css';
 import Button from '@mui/material/Button';
 

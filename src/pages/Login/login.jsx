@@ -1,5 +1,5 @@
 import css from './login.module.css'
-import { logIn } from 'redux/auth/authOperation';
+import { logIn } from "redux/auth/authOperations";
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { selectIsLogin } from 'redux/auth/authSelector';

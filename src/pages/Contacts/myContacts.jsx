@@ -1,4 +1,4 @@
-import ContactList from "components/ContactList/contactlist";
+import ContactList from "components/ContactList/ContactList";
 import { FilterContacts } from "components/Filter/filter";
 import Phonebook from "components/Phonebook/phonebook";
 import { useSelector } from "react-redux";
